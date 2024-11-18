@@ -6,7 +6,6 @@ import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.time.MonthDay;
 
@@ -40,6 +39,5 @@ public abstract class Transacoes implements MostrarDados, DeletarDados {
     }
 
     @Override
-    public void removerDados() {
-    }
+    public void removerDados() {}
 }

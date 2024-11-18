@@ -1,15 +1,9 @@
 import Estoque.Estoque;
 import Pessoas.Fornecedor;
 import Pessoas.Funcionario;
-import Produtos.Produto;
 import Transacoes.Entrada;
-import Transacoes.Saida;
-import Transacoes.Transacoes;
 import com.opencsv.CSVWriter;
-import com.opencsv.CSVReader;
-import com.opencsv.exceptions.CsvValidationException;
 
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
