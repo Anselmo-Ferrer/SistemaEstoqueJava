@@ -4,6 +4,7 @@ import Pessoas.Funcionario;
 import Produtos.Produto;
 import Transacoes.Entrada;
 import Transacoes.Saida;
+import Transacoes.Transacoes;
 import com.opencsv.CSVWriter;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
@@ -22,8 +23,8 @@ public class Main {
         boolean menu = true;
         Estoque estoque = new Estoque();
         Funcionario funcionario = new Funcionario();
+        Fornecedor fornecedor = new Fornecedor();
         Entrada entrada = new Entrada();
-        Saida saida = new Saida();
 
         while (menu) {
             Scanner scanner = new Scanner(System.in);
@@ -42,33 +43,11 @@ public class Main {
                 System.out.println("3- Remover");
                 int selecao2 = scanner.nextInt();
                 if (selecao2 == 1) {
-                    Scanner scanner1 = new Scanner(System.in);
-                    System.out.println("Id: ");
-                    int id = scanner1.nextInt();
-
-                    System.out.println("Tipo: ");
-                    System.out.println("1- Alimento");
-                    System.out.println("2- Bebida");
-                    String tipo;
-                    int selecaoTipo = scanner1.nextInt();
-                    if (selecaoTipo == 1) {
-                        tipo = "Alimento";
-                    } else {
-                        tipo = "Bebida";
-                    }
-                    System.out.println("Nome: ");
-                    String nome = scanner1.next();
-                    System.out.println("Quantidade: ");
-                    int quantidade = scanner1.nextInt();
-                    System.out.println("Preco: ");
-                    double preco = scanner1.nextDouble();
-                    estoque.adicionarPrdouto(id, tipo, nome, quantidade, preco);
-                    entrada.transacaoConfirmar(nome, quantidade);
+                    estoque.adicionarPrdouto();
                 } else if (selecao2 == 2) {
                     estoque.editarProduto();
                 } else if (selecao2 == 3) {
                     estoque.removerProduto();
-                    //saida.transacaoConfirmar(nome, quantidade);
                 }
             }
 
@@ -78,7 +57,7 @@ public class Main {
                 System.out.println("2- Limpar Estoque");
                 int selecao2 = scanner.nextInt();
                 if (selecao2 == 1) {
-                    estoque.mostrarDados();
+                    estoque.visualizarDados();
                 } else if (selecao2 == 2) {
                     System.out.println("Informe a senha para limpar o estoque: ");
                     String senha = scanner.next();
@@ -96,7 +75,7 @@ public class Main {
                 if (selecao2 == 1) {
                     funcionario.adionarPessoa();
                 } else if (selecao2 == 2) {
-                    // funcionario.removerPessoa();
+                    funcionario.removerPessoa();
                 }
             }
 
@@ -106,9 +85,9 @@ public class Main {
                 System.out.println("2- Remover Fornecedor");
                 int selecao2 = scanner.nextInt();
                 if (selecao2 == 1) {
-                    // fornecedor.adionarPessoa();
+                    fornecedor.adionarPessoa();
                 } else if (selecao2 == 2) {
-                    // fornecedor.removerPessoa();
+                    fornecedor.removerPessoa();
                 }
             }
 
@@ -118,11 +97,12 @@ public class Main {
                 System.out.println("2- Limpar Transacoes");
                 int selecao2 = scanner.nextInt();
                 if (selecao2 == 1) {
-                    estoque.mostrarDados();
+                    entrada.visualizarDados();
                 } else if (selecao2 == 2) {
                     System.out.println("Informe a senha para limpar as Transacoes: ");
                     String senha = scanner.next();
                     if (senha.equals("abcd")) {
+                        entrada.removerDados();
                         System.out.println("Transacoes limpa com sucesso");
                     }
                 }

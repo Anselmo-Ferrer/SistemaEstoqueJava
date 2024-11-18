@@ -1,6 +1,9 @@
 package Estoque;
 
-import Interfaces.LerArquivo;
+import Interfaces.DeletarDados;
+import Interfaces.MostrarDados;
+import Transacoes.Entrada;
+import Transacoes.Saida;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 import com.opencsv.exceptions.CsvValidationException;
@@ -12,10 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Estoque implements LerArquivo {
+public class Estoque implements DeletarDados, MostrarDados {
 
     @Override
-    public void mostrarDados() {
+    public void visualizarDados() {
         try (CSVReader reader = new CSVReader(new FileReader("src/BancoDeDados/estoque.csv"))) {
             String[] linha;
             while (true) {
@@ -34,7 +37,32 @@ public class Estoque implements LerArquivo {
         }
     }
 
-    public void adicionarPrdouto(int id, String tipo, String nome, int quantidade, double preco) {
+    public void adicionarPrdouto() {
+        Entrada entrada = new Entrada();
+
+        // -------------PARTE DE CAPTURA DE INFORMACOES------
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Id: ");
+        int id = scanner.nextInt();
+        System.out.println("Tipo: ");
+        System.out.println("1- Alimento");
+        System.out.println("2- Bebida");
+        String tipo;
+        int selecaoTipo = scanner.nextInt();
+        if (selecaoTipo == 1) {
+            tipo = "Alimento";
+        } else {
+            tipo = "Bebida";
+        }
+        System.out.println("Nome: ");
+        String nome = scanner.next();
+        System.out.println("Quantidade: ");
+        int quantidade = scanner.nextInt();
+        System.out.println("Preco: ");
+        double preco = scanner.nextDouble();
+
+
+        // -------------PARTE DE ADICIONAR O PRODUTO NO ARQUIVO------
         try (CSVWriter writer = new CSVWriter(new FileWriter("src/BancoDeDados/estoque.csv", true))) {  // O "true" abre o arquivo em modo append
             String[] produto = {
                     String.valueOf(id),
@@ -47,19 +75,27 @@ public class Estoque implements LerArquivo {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        entrada.transacaoConfirmar(nome, quantidade);
     }
 
     public void removerProduto() {
+        Saida saida = new Saida();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Id do produto a remover: ");
         int id = scanner.nextInt();
 
         String arquivoCSV = "src/BancoDeDados/estoque.csv";
         List<String[]> linhas = new ArrayList<>(); // Para armazenar as linhas do arquivo
+        String nomeProduto = "";
+        int quantidadeProduto = 0;
 
         try (CSVReader reader = new CSVReader(new FileReader(arquivoCSV))) {
             String[] linha;
             while ((linha = reader.readNext()) != null) {
+                if (linha[0].equals(String.valueOf(id))) {
+                    nomeProduto = linha[2];
+                    quantidadeProduto = Integer.parseInt(linha[3]);
+                }
                 // Verifica se a linha tem um ID diferente do que queremos remover
                 if (!linha[0].equals(String.valueOf(id))) {
                     linhas.add(linha); // Adiciona à lista se não for para remover
@@ -76,6 +112,7 @@ public class Estoque implements LerArquivo {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        saida.transacaoConfirmar(nomeProduto, quantidadeProduto);
     }
 
     public void editarProduto() {
@@ -138,5 +175,14 @@ public class Estoque implements LerArquivo {
         }
     }
 
+    @Override
+    public void removerDados() {
+        String estoqueCsv = "src/BancoDeDados/estoque.csv";
 
+        try (FileWriter writer = new FileWriter(estoqueCsv, false)) {
+            System.out.println("O estoque foi limpo!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

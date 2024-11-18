@@ -45,4 +45,15 @@ public class Entrada extends Transacoes{
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void removerDados() {
+        String transacoesCsv = "src/BancoDeDados/transacoes.csv";
+
+        try (FileWriter writer = new FileWriter(transacoesCsv, false)) {
+            System.out.println("As transacoes foram limpas!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
