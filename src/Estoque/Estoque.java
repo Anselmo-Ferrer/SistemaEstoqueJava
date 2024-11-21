@@ -17,26 +17,6 @@ import java.util.Scanner;
 
 public class Estoque implements DeletarDados, MostrarDados {
 
-    @Override
-    public void visualizarDados() {
-        try (CSVReader reader = new CSVReader(new FileReader("src/BancoDeDados/estoque.csv"))) {
-            String[] linha;
-            while (true) {
-                try {
-                    linha = reader.readNext();
-                    if (linha == null) {
-                        break;  // Fim do arquivo
-                    }
-                    System.out.println("Linha: " + String.join(", ", linha));
-                } catch (CsvValidationException e) {
-                    e.printStackTrace();
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public void adicionarPrdouto() {
         Entrada entrada = new Entrada();
 
@@ -170,6 +150,26 @@ public class Estoque implements DeletarDados, MostrarDados {
         try (CSVWriter writer = new CSVWriter(new FileWriter(arquivoCSV))) {
             writer.writeAll(linhas); // Escreve todas as linhas (alteradas ou não)
             System.out.println("Alterações salvas no arquivo.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void visualizarDados() {
+        try (CSVReader reader = new CSVReader(new FileReader("src/BancoDeDados/estoque.csv"))) {
+            String[] linha;
+            while (true) {
+                try {
+                    linha = reader.readNext();
+                    if (linha == null) {
+                        break;  // Fim do arquivo
+                    }
+                    System.out.println(String.join(", ", linha));
+                } catch (CsvValidationException e) {
+                    e.printStackTrace();
+                }
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
