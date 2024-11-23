@@ -1,6 +1,7 @@
 import Estoque.Estoque;
 import Pessoas.Fornecedor;
 import Pessoas.Funcionario;
+import Pessoas.Pessoa;
 import Transacoes.Entrada;
 
 import java.util.Scanner;
@@ -54,6 +55,7 @@ public class Main {
                     System.out.println("Informe a senha para limpar o estoque: ");
                     String senha = scanner.next();
                     if (senha.equals("1234")) {
+                        estoque.removerDados();
                         System.out.println("Estoque limpo com sucesso");
                     }
                 } else if (selecao2 == 3) {
@@ -65,13 +67,16 @@ public class Main {
                 System.out.println("Funcionario");
                 System.out.println("1- Cadastrar Funcionario");
                 System.out.println("2- Remover Funcionario");
-                System.out.println("3- Voltar");
+                System.out.println("3- Ver funcionarios");
+                System.out.println("4- Voltar");
                 int selecao2 = scanner.nextInt();
                 if (selecao2 == 1) {
                     funcionario.adionarPessoa();
                 } else if (selecao2 == 2) {
                     funcionario.removerPessoa();
                 } else if (selecao2 == 3) {
+                    funcionario.visualizarDados();
+                } else if (selecao2 == 4) {
                     continue;
                 }
             }
@@ -80,13 +85,16 @@ public class Main {
                 System.out.println("Fornecedor");
                 System.out.println("1- Cadastrar Fornecedor");
                 System.out.println("2- Remover Fornecedor");
-                System.out.println("3- Voltar");
+                System.out.println("3- Ver funcionarios");
+                System.out.println("4- Voltar");
                 int selecao2 = scanner.nextInt();
                 if (selecao2 == 1) {
                     fornecedor.adionarPessoa();
                 } else if (selecao2 == 2) {
                     fornecedor.removerPessoa();
                 } else if (selecao2 == 3) {
+                    fornecedor.visualizarDados();
+                } else if (selecao2 == 4) {
                     continue;
                 }
             }

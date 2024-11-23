@@ -20,10 +20,20 @@ public class Estoque implements DeletarDados, MostrarDados {
     public void adicionarPrdouto() {
         Entrada entrada = new Entrada();
 
+        int numeroDeLinhas = 0;
+
+        try (CSVReader reader = new CSVReader(new FileReader("src/BancoDeDados/estoque.csv"))) {
+            while (reader.readNext() != null) {
+                numeroDeLinhas++;
+            }
+        } catch (IOException | CsvValidationException e) {
+            e.printStackTrace();
+        }
+
+        int id = numeroDeLinhas;
+
         // -------------PARTE DE CAPTURA DE INFORMACOES------
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Id: ");
-        int id = scanner.nextInt();
         System.out.println("Tipo: ");
         System.out.println("1- Alimento");
         System.out.println("2- Bebida");
@@ -43,7 +53,7 @@ public class Estoque implements DeletarDados, MostrarDados {
 
 
         // -------------PARTE DE ADICIONAR O PRODUTO NO ARQUIVO------
-        try (CSVWriter writer = new CSVWriter(new FileWriter("src/BancoDeDados/estoque.csv", true))) {  // O "true" abre o arquivo em modo append
+        try (CSVWriter writer = new CSVWriter(new FileWriter("src/BancoDeDados/estoque.csv", true))) {
             String[] produto = {
                     String.valueOf(id),
                     tipo,
@@ -184,5 +194,14 @@ public class Estoque implements DeletarDados, MostrarDados {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        try (CSVWriter writer = new CSVWriter(new FileWriter(estoqueCsv))) {
+            String[] cabecalho = {"Id", "Tipo", "Nome", "Quantidade", "Preço"};
+            writer.writeNext(cabecalho);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }

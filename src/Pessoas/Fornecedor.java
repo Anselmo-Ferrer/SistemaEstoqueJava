@@ -14,6 +14,11 @@ import java.util.Scanner;
 public class Fornecedor extends Pessoa {
 
     @Override
+    public void visualizarDados() {
+        super.visualizarDados();
+    }
+
+    @Override
     public void adionarPessoa() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Id: ");

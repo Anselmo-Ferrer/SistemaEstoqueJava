@@ -26,9 +26,9 @@ public abstract class Transacoes implements MostrarDados, DeletarDados {
                 try {
                     linha = reader.readNext();
                     if (linha == null) {
-                        break;  // Fim do arquivo
+                        break;
                     }
-                    System.out.println("Linha: " + String.join(", ", linha));
+                    System.out.println(String.join(", ", linha));
                 } catch (CsvValidationException e) {
                     e.printStackTrace();
                 }

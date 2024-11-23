@@ -9,7 +9,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.io.FileReader;
 
 public class Entrada extends Transacoes{
 
@@ -19,26 +18,25 @@ public class Entrada extends Transacoes{
 
         try (CSVReader reader = new CSVReader(new FileReader("src/BancoDeDados/transacoes.csv"))) {
             while (reader.readNext() != null) {
-                numeroDeLinhas++; // Incrementa para cada linha lida
+                numeroDeLinhas++;
             }
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }
 
-        id = numeroDeLinhas;
+        int id = numeroDeLinhas;
         String tipo = "Entrada";
         String produto = nome + " " + quantidade + "x";
         LocalDateTime agora = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         String dataFormatada = agora.format(formatter);
 
-        try (CSVWriter writer = new CSVWriter(new FileWriter("src/BancoDeDados/transacoes.csv", true))) {  // O "true" abre o arquivo em modo append
+        try (CSVWriter writer = new CSVWriter(new FileWriter("src/BancoDeDados/transacoes.csv", true))) {
             String[] transacao = {
                     String.valueOf(id),
                     tipo,
                     produto,
                     dataFormatada
-
             };
             writer.writeNext(transacao);
         } catch (IOException e) {

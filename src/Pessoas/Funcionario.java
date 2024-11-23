@@ -1,5 +1,6 @@
 package Pessoas;
 
+import Interfaces.MostrarDados;
 import Transacoes.Saida;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
@@ -14,6 +15,10 @@ import java.util.Scanner;
 
 public class Funcionario extends Pessoa {
 
+    @Override
+    public void visualizarDados() {
+        super.visualizarDados();
+    }
 
     @Override
     public void adionarPessoa() {
