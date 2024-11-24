@@ -24,7 +24,7 @@ public class Estoque implements DeletarDados, MostrarDados {
         int id = scanner.nextInt();
 
         String arquivoCSV = "src/BancoDeDados/estoque.csv";
-        List<String[]> linhas = new ArrayList<>(); // Para armazenar as linhas do arquivo
+        List<String[]> linhas = new ArrayList<>();
         String nomeProduto = "";
         int quantidadeProduto = 0;
 
@@ -35,18 +35,17 @@ public class Estoque implements DeletarDados, MostrarDados {
                     nomeProduto = linha[2];
                     quantidadeProduto = Integer.parseInt(linha[3]);
                 }
-                // Verifica se a linha tem um ID diferente do que queremos remover
                 if (!linha[0].equals(String.valueOf(id))) {
-                    linhas.add(linha); // Adiciona à lista se não for para remover
+                    linhas.add(linha);
                 }
             }
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }
 
-        // Reescrevendo o arquivo com as linhas restantes
+        // Reescrevendo o arquivo
         try (CSVWriter writer = new CSVWriter(new FileWriter(arquivoCSV))) {
-            writer.writeAll(linhas); // Escreve todas as linhas restantes no arquivo
+            writer.writeAll(linhas);
             System.out.println("Produto com ID " + id + " removido.");
         } catch (IOException e) {
             e.printStackTrace();
@@ -60,12 +59,11 @@ public class Estoque implements DeletarDados, MostrarDados {
         int id = scanner.nextInt();
 
         String arquivoCSV = "src/BancoDeDados/estoque.csv";
-        List<String[]> linhas = new ArrayList<>(); // Para armazenar as linhas do arquivo
+        List<String[]> linhas = new ArrayList<>();
 
         try (CSVReader reader = new CSVReader(new FileReader(arquivoCSV))) {
             String[] linha;
             while ((linha = reader.readNext()) != null) {
-                // Verifica se a linha corresponde ao ID informado
                 if (linha[0].equals(String.valueOf(id))) {
                     System.out.println("Produto atual: " + String.join(", ", linha));
                     System.out.println("Escolha o que deseja editar: ");
@@ -74,7 +72,7 @@ public class Estoque implements DeletarDados, MostrarDados {
                     System.out.println("3 - Quantidade");
                     System.out.println("4 - Preço");
                     int selecao = scanner.nextInt();
-                    scanner.nextLine(); // Consome a quebra de linha após o número
+                    scanner.nextLine();
 
                     switch (selecao) {
                         case 1:
@@ -98,16 +96,14 @@ public class Estoque implements DeletarDados, MostrarDados {
                     }
                     System.out.println("Produto atualizado: " + String.join(", ", linha));
                 }
-                // Adiciona a linha (editada ou não) à lista
                 linhas.add(linha);
             }
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }
 
-        // Reescreve o arquivo CSV com as alterações
         try (CSVWriter writer = new CSVWriter(new FileWriter(arquivoCSV))) {
-            writer.writeAll(linhas); // Escreve todas as linhas (alteradas ou não)
+            writer.writeAll(linhas);
             System.out.println("Alterações salvas no arquivo.");
         } catch (IOException e) {
             e.printStackTrace();
@@ -122,7 +118,7 @@ public class Estoque implements DeletarDados, MostrarDados {
                 try {
                     linha = reader.readNext();
                     if (linha == null) {
-                        break;  // Fim do arquivo
+                        break;
                     }
                     System.out.println(String.join(", ", linha));
                 } catch (CsvValidationException e) {
@@ -138,7 +134,6 @@ public class Estoque implements DeletarDados, MostrarDados {
     public void removerDados() {
         String estoqueCsv = "src/BancoDeDados/estoque.csv";
 
-        // Verifica se o estoque está vazio
         try (CSVReader reader = new CSVReader(new FileReader(estoqueCsv))) {
             String[] linha = reader.readNext();
             linha = reader.readNext();

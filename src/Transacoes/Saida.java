@@ -18,7 +18,7 @@ public class Saida extends Transacoes{
 
         try (CSVReader reader = new CSVReader(new FileReader("src/BancoDeDados/transacoes.csv"))) {
             while (reader.readNext() != null) {
-                numeroDeLinhas++; // Incrementa para cada linha lida
+                numeroDeLinhas++;
             }
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();

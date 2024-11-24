@@ -28,7 +28,7 @@ public class Fornecedor extends Pessoa {
         String tipo = "Fornecedor";
         String cargo = "Fornecedor";
 
-        try (CSVWriter writer = new CSVWriter(new FileWriter("src/BancoDeDados/pessoas.csv", true))) {  // O "true" abre o arquivo em modo append
+        try (CSVWriter writer = new CSVWriter(new FileWriter("src/BancoDeDados/pessoas.csv", true))) {
             String[] pessoa = {
                     String.valueOf(id),
                     tipo,
@@ -49,23 +49,21 @@ public class Fornecedor extends Pessoa {
         int id = scanner.nextInt();
 
         String arquivoCSV = "src/BancoDeDados/pessoas.csv";
-        List<String[]> linhas = new ArrayList<>(); // Para armazenar as linhas do arquivo
+        List<String[]> linhas = new ArrayList<>();
 
         try (CSVReader reader = new CSVReader(new FileReader(arquivoCSV))) {
             String[] linha;
             while ((linha = reader.readNext()) != null) {
-                // Verifica se a linha tem um ID diferente do que queremos remover
                 if (!linha[0].equals(String.valueOf(id))) {
-                    linhas.add(linha); // Adiciona à lista se não for para remover
+                    linhas.add(linha);
                 }
             }
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }
 
-        // Reescrevendo o arquivo com as linhas restantes
         try (CSVWriter writer = new CSVWriter(new FileWriter(arquivoCSV))) {
-            writer.writeAll(linhas); // Escreve todas as linhas restantes no arquivo
+            writer.writeAll(linhas);
             System.out.println("Pessoa com ID " + id + " removido.");
         } catch (IOException e) {
             e.printStackTrace();
