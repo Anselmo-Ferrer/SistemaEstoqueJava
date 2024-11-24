@@ -1,9 +1,8 @@
 package Estoque;
 
-import Excepetions.QuantidadeMaiorQueZero;
+import Excepetions.EstoqueVazio;
 import Interfaces.DeletarDados;
 import Interfaces.MostrarDados;
-import Transacoes.Entrada;
 import Transacoes.Saida;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
@@ -139,19 +138,24 @@ public class Estoque implements DeletarDados, MostrarDados {
     public void removerDados() {
         String estoqueCsv = "src/BancoDeDados/estoque.csv";
 
-        try (FileWriter writer = new FileWriter(estoqueCsv, false)) {
-            System.out.println("O estoque foi limpo!");
-        } catch (IOException e) {
+        // Verifica se o estoque está vazio
+        try (CSVReader reader = new CSVReader(new FileReader(estoqueCsv))) {
+            String[] linha = reader.readNext();
+            linha = reader.readNext();
+
+            if (linha == null) {
+                throw new EstoqueVazio("O estoque já está vazio!");
+            }
+        } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }
 
         try (CSVWriter writer = new CSVWriter(new FileWriter(estoqueCsv))) {
             String[] cabecalho = {"Id", "Tipo", "Nome", "Quantidade", "Preço"};
             writer.writeNext(cabecalho);
-
+            System.out.println("O estoque foi limpo!");
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }

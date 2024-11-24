@@ -36,10 +36,10 @@ public class Main {
                 System.out.println("4- Voltar");
                 int selecao2 = scanner.nextInt();
                 if (selecao2 == 1) {
-                    int selecao3 = scanner.nextInt();
                     System.out.println("Tipo: ");
                     System.out.println("1- Alimento");
                     System.out.println("2- Bebida");
+                    int selecao3 = scanner.nextInt();
                     if (selecao3 == 1) {
                         alimento.adicionarAoEstoque();
                     } else if (selecao3 == 2) {
