@@ -1,5 +1,6 @@
 package Estoque;
 
+import Excepetions.QuantidadeMaiorQueZero;
 import Interfaces.DeletarDados;
 import Interfaces.MostrarDados;
 import Transacoes.Entrada;
@@ -16,57 +17,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Estoque implements DeletarDados, MostrarDados {
-
-    public void adicionarPrdouto() {
-        Entrada entrada = new Entrada();
-
-        int numeroDeLinhas = 0;
-
-        try (CSVReader reader = new CSVReader(new FileReader("src/BancoDeDados/estoque.csv"))) {
-            while (reader.readNext() != null) {
-                numeroDeLinhas++;
-            }
-        } catch (IOException | CsvValidationException e) {
-            e.printStackTrace();
-        }
-
-        int id = numeroDeLinhas;
-
-        // -------------PARTE DE CAPTURA DE INFORMACOES------
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Tipo: ");
-        System.out.println("1- Alimento");
-        System.out.println("2- Bebida");
-        String tipo;
-        int selecaoTipo = scanner.nextInt();
-        if (selecaoTipo == 1) {
-            tipo = "Alimento";
-        } else {
-            tipo = "Bebida";
-        }
-        System.out.println("Nome: ");
-        String nome = scanner.next();
-        System.out.println("Quantidade: ");
-        int quantidade = scanner.nextInt();
-        System.out.println("Preco: ");
-        double preco = scanner.nextDouble();
-
-
-        // -------------PARTE DE ADICIONAR O PRODUTO NO ARQUIVO------
-        try (CSVWriter writer = new CSVWriter(new FileWriter("src/BancoDeDados/estoque.csv", true))) {
-            String[] produto = {
-                    String.valueOf(id),
-                    tipo,
-                    nome,
-                    String.valueOf(quantidade),
-                    String.valueOf(preco)
-            };
-            writer.writeNext(produto);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        entrada.transacaoConfirmar(nome, quantidade);
-    }
 
     public void removerProduto() {
         Saida saida = new Saida();

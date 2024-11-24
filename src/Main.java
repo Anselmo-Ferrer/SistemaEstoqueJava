@@ -1,7 +1,8 @@
 import Estoque.Estoque;
 import Pessoas.Fornecedor;
 import Pessoas.Funcionario;
-import Pessoas.Pessoa;
+import Produtos.Alimento;
+import Produtos.Bebida;
 import Transacoes.Entrada;
 
 import java.util.Scanner;
@@ -10,6 +11,8 @@ public class Main {
     public static void main(String[] args) {
 
         boolean menu = true;
+        Alimento alimento = new Alimento();
+        Bebida bebida = new Bebida();
         Estoque estoque = new Estoque();
         Funcionario funcionario = new Funcionario();
         Fornecedor fornecedor = new Fornecedor();
@@ -33,7 +36,15 @@ public class Main {
                 System.out.println("4- Voltar");
                 int selecao2 = scanner.nextInt();
                 if (selecao2 == 1) {
-                    estoque.adicionarPrdouto();
+                    int selecao3 = scanner.nextInt();
+                    System.out.println("Tipo: ");
+                    System.out.println("1- Alimento");
+                    System.out.println("2- Bebida");
+                    if (selecao3 == 1) {
+                        alimento.adicionarAoEstoque();
+                    } else if (selecao3 == 2) {
+                        bebida.adicionarAoEstoque();
+                    }
                 } else if (selecao2 == 2) {
                     estoque.editarProduto();
                 } else if (selecao2 == 3) {
