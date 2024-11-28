@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Estoque implements DeletarDados, MostrarDados {
+public class Estoque implements MostrarDados, DeletarDados {
 
     public void removerProduto() {
         Saida saida = new Saida();
@@ -43,14 +43,13 @@ public class Estoque implements DeletarDados, MostrarDados {
             e.printStackTrace();
         }
 
-        // Reescrevendo o arquivo
         try (CSVWriter writer = new CSVWriter(new FileWriter(arquivoCSV))) {
             writer.writeAll(linhas);
             System.out.println("Produto com ID " + id + " removido.");
         } catch (IOException e) {
             e.printStackTrace();
         }
-        saida.transacaoConfirmar(nomeProduto, quantidadeProduto);
+        saida.transacao(nomeProduto, quantidadeProduto);
     }
 
     public void editarProduto() {

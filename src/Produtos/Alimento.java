@@ -29,7 +29,6 @@ public class Alimento extends Produto{
 
         int id = numeroDeLinhas;
 
-        // -------------PARTE DE CAPTURA DE INFORMACOES------
         Scanner scanner = new Scanner(System.in);
         String tipo = "Alimento";
         System.out.println("Nome: ");
@@ -43,7 +42,6 @@ public class Alimento extends Produto{
         double preco = scanner.nextDouble();
 
 
-        // -------------PARTE DE ADICIONAR O PRODUTO NO ARQUIVO------
         try (CSVWriter writer = new CSVWriter(new FileWriter("src/BancoDeDados/estoque.csv", true))) {
             String[] produto = {
                     String.valueOf(id),
@@ -56,7 +54,11 @@ public class Alimento extends Produto{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        entrada.transacaoConfirmar(nome, quantidade);
+        entrada.transacao(nome, quantidade);
     }
 
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

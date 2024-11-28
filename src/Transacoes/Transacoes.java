@@ -12,11 +12,10 @@ import java.time.MonthDay;
 public abstract class Transacoes implements MostrarDados, DeletarDados {
     protected int id;
     protected String tipo;
-    protected String[] produtos;
-    protected int quantidade;
+    protected String produto;
     protected MonthDay dia;
 
-    public abstract void transacaoConfirmar(String nome, int quantidade);
+    public abstract void transacao(String nome, int quantidade);
 
     @Override
     public void visualizarDados() {
@@ -40,4 +39,9 @@ public abstract class Transacoes implements MostrarDados, DeletarDados {
 
     @Override
     public void removerDados() {}
+
+    @Override
+    public String toString() {
+        return "Id: " + id + ", Tipo: '" + tipo + ", Produto: '" + produto + ", Dia: " + dia;
+    }
 }

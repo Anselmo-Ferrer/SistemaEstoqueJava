@@ -16,12 +16,7 @@ import java.util.Scanner;
 public class Funcionario extends Pessoa {
 
     @Override
-    public void visualizarDados() {
-        super.visualizarDados();
-    }
-
-    @Override
-    public void adionarPessoa() {
+    public void adicionar() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Id: ");
         int id = scanner.nextInt();
@@ -46,7 +41,7 @@ public class Funcionario extends Pessoa {
     }
 
     @Override
-    public void removerPessoa() {
+    public void remover() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Id da pessoa a remover: ");
         int id = scanner.nextInt();
@@ -71,6 +66,16 @@ public class Funcionario extends Pessoa {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void visualizarDados() {
+        super.visualizarDados();
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }
 

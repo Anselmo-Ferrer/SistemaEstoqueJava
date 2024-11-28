@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
+        // scene builder
         boolean menu = true;
         Alimento alimento = new Alimento();
         Bebida bebida = new Bebida();
@@ -95,10 +96,10 @@ public class Main {
                     int selecaoFuncionario = scanner.nextInt();
                     switch (selecaoFuncionario) {
                         case 1:
-                            funcionario.adionarPessoa();
+                            funcionario.adicionar();
                             break;
                         case 2:
-                            funcionario.removerPessoa();
+                            funcionario.remover();
                             break;
                         case 3:
                             funcionario.visualizarDados();
@@ -119,10 +120,10 @@ public class Main {
                     int selecaoFornecedor = scanner.nextInt();
                     switch (selecaoFornecedor) {
                         case 1:
-                            fornecedor.adionarPessoa();
+                            fornecedor.adicionar();
                             break;
                         case 2:
-                            fornecedor.removerPessoa();
+                            fornecedor.remover();
                             break;
                         case 3:
                             fornecedor.visualizarDados();

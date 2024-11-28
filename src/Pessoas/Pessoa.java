@@ -1,6 +1,7 @@
 package Pessoas;
 
 import Interfaces.DeletarDados;
+import Interfaces.Gerenciamento;
 import Interfaces.MostrarDados;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
@@ -9,14 +10,16 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public abstract class Pessoa implements DeletarDados, MostrarDados {
+public abstract class Pessoa implements Gerenciamento, MostrarDados, DeletarDados {
     protected int id;
+    protected String tipo;
     protected String nome;
     protected String cargo;
+    @Override
+    public void adicionar() {}
 
-    public abstract void adionarPessoa();
-
-    public abstract void removerPessoa();
+    @Override
+    public void remover() {}
 
     @Override
     public void visualizarDados() {
@@ -51,6 +54,6 @@ public abstract class Pessoa implements DeletarDados, MostrarDados {
 
     @Override
     public String toString() {
-        return  "ID: " + id + ", Nome: " + nome + ", Cargo: " + cargo;
+        return  "ID: " + id + ", Tipo: " + tipo + ", Nome: " + nome + ", Cargo: " + cargo;
     }
 }

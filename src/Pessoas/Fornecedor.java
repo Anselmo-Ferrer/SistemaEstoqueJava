@@ -14,12 +14,7 @@ import java.util.Scanner;
 public class Fornecedor extends Pessoa {
 
     @Override
-    public void visualizarDados() {
-        super.visualizarDados();
-    }
-
-    @Override
-    public void adionarPessoa() {
+    public void adicionar() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Id: ");
         int id = scanner.nextInt();
@@ -29,21 +24,15 @@ public class Fornecedor extends Pessoa {
         String cargo = "Fornecedor";
 
         try (CSVWriter writer = new CSVWriter(new FileWriter("src/BancoDeDados/pessoas.csv", true))) {
-            String[] pessoa = {
-                    String.valueOf(id),
-                    tipo,
-                    nome,
-                    cargo
-
-            };
+            String[] pessoa = {String.valueOf(id), tipo, nome, cargo};
             writer.writeNext(pessoa);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Erro: " + e.getMessage());
         }
     }
 
     @Override
-    public void removerPessoa() {
+    public void remover() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Id da pessoa a remover: ");
         int id = scanner.nextInt();
@@ -59,18 +48,24 @@ public class Fornecedor extends Pessoa {
                 }
             }
         } catch (IOException | CsvValidationException e) {
-            e.printStackTrace();
+            System.out.println("Erro: " + e.getMessage());
         }
 
         try (CSVWriter writer = new CSVWriter(new FileWriter(arquivoCSV))) {
             writer.writeAll(linhas);
             System.out.println("Pessoa com ID " + id + " removido.");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Erro: " + e.getMessage());
         }
     }
 
-    public void GerarEncomenda() {
-        System.out.println("Encomenda Criada com sucesso");
+    @Override
+    public void visualizarDados() {
+        super.visualizarDados();
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }

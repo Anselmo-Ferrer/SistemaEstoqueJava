@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 public class Saida extends Transacoes{
 
     @Override
-    public void transacaoConfirmar(String nome, int quantidade) {
+    public void transacao(String nome, int quantidade) {
         int numeroDeLinhas = 0;
 
         try (CSVReader reader = new CSVReader(new FileReader("src/BancoDeDados/transacoes.csv"))) {
@@ -43,5 +43,10 @@ public class Saida extends Transacoes{
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }
