@@ -46,60 +46,6 @@ public class Estoque implements MostrarDados, DeletarDados {
         saida.transacao(nomeProduto, quantidadeProduto);
     }
 
-    public void editarProdutoDoEstoque(int id) {
-        Scanner scanner = new Scanner(System.in);
-
-        List<String[]> linhas = new ArrayList<>();
-
-        try (CSVReader reader = new CSVReader(new FileReader(estoqueCSV))) {
-            String[] linha;
-            while ((linha = reader.readNext()) != null) {
-                if (linha[0].equals(String.valueOf(id))) {
-                    System.out.println("Produto atual: " + String.join(", ", linha));
-                    System.out.println("Escolha o que deseja editar: ");
-                    System.out.println("1 - Tipo");
-                    System.out.println("2 - Nome");
-                    System.out.println("3 - Quantidade");
-                    System.out.println("4 - Preço");
-                    int selecao = scanner.nextInt();
-                    scanner.nextLine();
-
-                    switch (selecao) {
-                        case 1:
-                            System.out.println("Novo tipo: ");
-                            linha[1] = scanner.nextLine();
-                            break;
-                        case 2:
-                            System.out.println("Novo nome: ");
-                            linha[2] = scanner.nextLine();
-                            break;
-                        case 3:
-                            System.out.println("Nova quantidade: ");
-                            linha[3] = String.valueOf(scanner.nextInt());
-                            break;
-                        case 4:
-                            System.out.println("Novo preço: ");
-                            linha[4] = String.valueOf(scanner.nextDouble());
-                            break;
-                        default:
-                            System.out.println("Opção inválida.");
-                    }
-                    System.out.println("Produto atualizado: " + String.join(", ", linha));
-                }
-                linhas.add(linha);
-            }
-        } catch (IOException | CsvValidationException e) {
-            e.printStackTrace();
-        }
-
-        try (CSVWriter writer = new CSVWriter(new FileWriter(estoqueCSV))) {
-            writer.writeAll(linhas);
-            System.out.println("Alterações salvas no arquivo.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     @Override
     public void visualizarDados() throws IOException, CsvValidationException {
         try (CSVReader reader = new CSVReader(new FileReader(estoqueCSV))) {

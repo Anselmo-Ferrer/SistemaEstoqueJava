@@ -32,9 +32,8 @@ public class Main {
                 case 1:
                     System.out.println("Produto");
                     System.out.println("1- Adicionar");
-                    System.out.println("2- Editar");
-                    System.out.println("3- Remover");
-                    System.out.println("4- Voltar");
+                    System.out.println("2- Remover");
+                    System.out.println("3- Voltar");
                     int selecao2 = scanner.nextInt();
                     switch (selecao2) {
                         case 1:
@@ -64,11 +63,6 @@ public class Main {
                             break;
 
                         case 2:
-                            System.out.println("Id do produto a editar: ");
-                            int idEditar = scanner.nextInt();
-                            estoque.editarProdutoDoEstoque(idEditar);
-                            break;
-                        case 3:
                             try {
                                 System.out.println("Id do produto a remover: ");
                                 int id = scanner.nextInt();
@@ -79,7 +73,7 @@ public class Main {
                                 throw new RuntimeException(e);
                             }
                             break;
-                        case 4:
+                        case 3:
                             break;
                         default:
                             System.out.println("Opcao invalida!");
