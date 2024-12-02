@@ -6,12 +6,12 @@ import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.time.MonthDay;
 
 public abstract class Transacoes implements MostrarDados, DeletarDados {
     protected int id;
-    protected String tipo;
     protected String produto;
     protected MonthDay dia;
 
@@ -38,7 +38,15 @@ public abstract class Transacoes implements MostrarDados, DeletarDados {
     }
 
     @Override
-    public void removerDados() {}
+    public void removerDados() {
+        String transacoesCsv = "src/BancoDeDados/transacoes.csv";
+
+        try (FileWriter writer = new FileWriter(transacoesCsv, false)) {
+            System.out.println("As transacoes foram limpas!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public String toString() {
@@ -47,7 +55,7 @@ public abstract class Transacoes implements MostrarDados, DeletarDados {
 
     public String toString(boolean detalhado) {
         if (detalhado) {
-            return "Id: " + id + ", Tipo: " + tipo + ", Produto: " + produto + ", Dia: " + dia;
+            return "Id: " + id + ", Produto: " + produto + ", Dia: " + dia;
         }
         return this.toString();
     }

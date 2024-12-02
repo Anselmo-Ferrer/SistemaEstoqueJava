@@ -11,27 +11,26 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Saida extends Transacoes{
+    private String tipo = "Saída";
 
     @Override
     public void transacao(String nome, int quantidade) {
-        int numeroDeLinhas = 0;
+        int id = 0;
 
         try (CSVReader reader = new CSVReader(new FileReader("src/BancoDeDados/transacoes.csv"))) {
             while (reader.readNext() != null) {
-                numeroDeLinhas++;
+                id++;
             }
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }
 
-        id = numeroDeLinhas;
-        String tipo = "Saida";
         String produto = nome + " " + quantidade + "x";
         LocalDateTime agora = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         String dataFormatada = agora.format(formatter);
 
-        try (CSVWriter writer = new CSVWriter(new FileWriter("src/BancoDeDados/transacoes.csv", true))) {  // O "true" abre o arquivo em modo append
+        try (CSVWriter writer = new CSVWriter(new FileWriter("src/BancoDeDados/transacoes.csv", true))) {
             String[] transacao = {
                     String.valueOf(id),
                     tipo,

@@ -12,13 +12,10 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        // scene builder
         boolean menu = true;
-        Alimento alimento = new Alimento();
-        Bebida bebida = new Bebida();
-        Estoque estoque = new Estoque();
-        Funcionario funcionario = new Funcionario();
         Fornecedor fornecedor = new Fornecedor();
+        Funcionario funcionario = new Funcionario();
+        Estoque estoque = new Estoque();
         Entrada entrada = new Entrada();
 
         while (menu) {
@@ -45,18 +42,37 @@ public class Main {
                             System.out.println("1- Alimento");
                             System.out.println("2- Bebida");
                             int selecao3 = scanner.nextInt();
+
+                            System.out.println("Id: ");
+                            int idProduto = scanner.nextInt();
+                            System.out.println("Nome: ");
+                            String nome = scanner.next();
+                            System.out.println("Quantidade: ");
+                            int quantidade = scanner.nextInt();
+                            System.out.println("Preço: ");
+                            int preco = scanner.nextInt();
+
                             if (selecao3 == 1) {
+                                Alimento alimento = new Alimento(idProduto, nome, quantidade, preco);
                                 alimento.adicionarProduto();
+                                entrada.transacao(nome, quantidade);
                             } else if (selecao3 == 2) {
+                                Bebida bebida = new Bebida(idProduto, nome, quantidade, preco);
                                 bebida.adicionarProduto();
+                                entrada.transacao(nome, quantidade);
                             }
                             break;
+
                         case 2:
-                            estoque.editarProdutoDoEstoque();
+                            System.out.println("Id do produto a editar: ");
+                            int idEditar = scanner.nextInt();
+                            estoque.editarProdutoDoEstoque(idEditar);
                             break;
                         case 3:
                             try {
-                                estoque.removerProdutoDoEstoque();
+                                System.out.println("Id do produto a remover: ");
+                                int id = scanner.nextInt();
+                                estoque.removerProdutoDoEstoque(id);
                             } catch (IOException e) {
                                 throw new RuntimeException(e);
                             } catch (CsvValidationException e) {
@@ -116,10 +132,19 @@ public class Main {
                     int selecaoFuncionario = scanner.nextInt();
                     switch (selecaoFuncionario) {
                         case 1:
-                            funcionario.adicionar();
+                            System.out.println("Id: ");
+                            int id = scanner.nextInt();
+                            System.out.println("Nome: ");
+                            String nome = scanner.next();
+                            System.out.println("Cargo: ");
+                            String cargo = scanner.next();
+                            Funcionario funcionario1 = new Funcionario(id, nome, cargo);
+                            funcionario1.adicionar();
                             break;
                         case 2:
-                            funcionario.remover();
+                            System.out.println("Id da pessoa a remover: ");
+                            int idRemover = scanner.nextInt();
+                            funcionario.remover(idRemover);
                             break;
                         case 3:
                             funcionario.visualizarDados();
@@ -140,10 +165,18 @@ public class Main {
                     int selecaoFornecedor = scanner.nextInt();
                     switch (selecaoFornecedor) {
                         case 1:
-                            fornecedor.adicionar();
+                            System.out.println("Id: ");
+                            int id = scanner.nextInt();
+                            System.out.println("Nome: ");
+                            String nome = scanner.next();
+                            String cargo = "Fornecedor";
+                            Fornecedor fornecedor1 = new Fornecedor(id, nome, cargo);
+                            fornecedor1.adicionar();
                             break;
                         case 2:
-                            fornecedor.remover();
+                            System.out.println("Id da pessoa a remover: ");
+                            int idRemover = scanner.nextInt();
+                            fornecedor.remover(idRemover);
                             break;
                         case 3:
                             fornecedor.visualizarDados();

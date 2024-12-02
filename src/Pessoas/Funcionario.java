@@ -14,17 +14,17 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Funcionario extends Pessoa {
+    private String tipo = "Funcionario";
+
+    public Funcionario(int id, String nome, String cargo) {
+        super(id, nome, cargo);
+    }
+
+    public Funcionario() {
+    }
 
     @Override
     public void adicionar() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Id: ");
-        int id = scanner.nextInt();
-        String tipo = "Funcionario";
-        System.out.println("Nome: ");
-        String nome = scanner.next();
-        System.out.println("Cargo: ");
-        String cargo = scanner.next();
 
         try (CSVWriter writer = new CSVWriter(new FileWriter("src/BancoDeDados/pessoas.csv", true))) {
             String[] pessoa = {
@@ -32,7 +32,6 @@ public class Funcionario extends Pessoa {
                     tipo,
                     nome,
                     cargo
-
             };
             writer.writeNext(pessoa);
         } catch (IOException e) {
@@ -41,10 +40,7 @@ public class Funcionario extends Pessoa {
     }
 
     @Override
-    public void remover() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Id da pessoa a remover: ");
-        int id = scanner.nextInt();
+    public void remover(int id) {
 
         String arquivoCSV = "src/BancoDeDados/pessoas.csv";
         List<String[]> linhas = new ArrayList<>();

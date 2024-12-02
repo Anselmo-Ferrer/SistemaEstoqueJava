@@ -11,21 +11,20 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Entrada extends Transacoes{
+    private String tipo = "Entrada";
 
     @Override
     public void transacao(String nome, int quantidade) {
-        int numeroDeLinhas = 0;
+        int id = 0;
 
         try (CSVReader reader = new CSVReader(new FileReader("src/BancoDeDados/transacoes.csv"))) {
             while (reader.readNext() != null) {
-                numeroDeLinhas++;
+                id++;
             }
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }
 
-        int id = numeroDeLinhas;
-        String tipo = "Entrada";
         String produto = nome + " " + quantidade + "x";
         LocalDateTime agora = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
@@ -34,17 +33,6 @@ public class Entrada extends Transacoes{
         try (CSVWriter writer = new CSVWriter(new FileWriter("src/BancoDeDados/transacoes.csv", true))) {
             String[] transacao = {String.valueOf(id), tipo, produto, dataFormatada};
             writer.writeNext(transacao);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void removerDados() {
-        String transacoesCsv = "src/BancoDeDados/transacoes.csv";
-
-        try (FileWriter writer = new FileWriter(transacoesCsv, false)) {
-            System.out.println("As transacoes foram limpas!");
         } catch (IOException e) {
             e.printStackTrace();
         }

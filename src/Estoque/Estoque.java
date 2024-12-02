@@ -3,6 +3,7 @@ package Estoque;
 import Excepetions.EstoqueVazio;
 import Interfaces.DeletarDados;
 import Interfaces.MostrarDados;
+import Produtos.Produto;
 import Transacoes.Saida;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
@@ -18,11 +19,8 @@ import java.util.Scanner;
 public class Estoque implements MostrarDados, DeletarDados {
     private String estoqueCSV = "src/BancoDeDados/estoque.csv";
 
-    public void removerProdutoDoEstoque() throws IOException, CsvValidationException {
+    public void removerProdutoDoEstoque(int id) throws IOException, CsvValidationException {
         Saida saida = new Saida();
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Id do produto a remover: ");
-        int id = scanner.nextInt();
 
         List<String[]> linhas = new ArrayList<>();
         String nomeProduto = "";
@@ -48,10 +46,8 @@ public class Estoque implements MostrarDados, DeletarDados {
         saida.transacao(nomeProduto, quantidadeProduto);
     }
 
-    public void editarProdutoDoEstoque() {
+    public void editarProdutoDoEstoque(int id) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Id do produto a editar: ");
-        int id = scanner.nextInt();
 
         List<String[]> linhas = new ArrayList<>();
 

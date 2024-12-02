@@ -12,14 +12,23 @@ import java.io.IOException;
 
 public abstract class Pessoa implements Gerenciamento, MostrarDados, DeletarDados {
     protected int id;
-    protected String tipo;
     protected String nome;
     protected String cargo;
+
+    public Pessoa(int id, String nome, String cargo) {
+        this.id = id;
+        this.nome = nome;
+        this.cargo = cargo;
+    }
+
+    public Pessoa() {
+    }
+
     @Override
     public void adicionar() {}
 
     @Override
-    public void remover() {}
+    public void remover(int id) {}
 
     @Override
     public void visualizarDados() {
@@ -59,7 +68,7 @@ public abstract class Pessoa implements Gerenciamento, MostrarDados, DeletarDado
 
     public String toString(boolean detalhado) {
         if (detalhado) {
-            return "ID: " + id + ", Tipo: " + tipo + ", Nome: " + nome + ", Cargo: " + cargo;
+            return "ID: " + id + ", Nome: " + nome + ", Cargo: " + cargo;
         }
         return this.toString();
     }

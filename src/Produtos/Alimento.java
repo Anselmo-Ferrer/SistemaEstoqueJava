@@ -12,49 +12,31 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Alimento extends Produto{
+    private String tipo = "Alimento";
+
+    public Alimento(int id, String nome, int quantidade, double preco) {
+        super(id, nome, quantidade, preco);
+    }
 
     @Override
     public void adicionarProduto() {
-        Entrada entrada = new Entrada();
-
-        int numeroDeLinhas = 0;
-
-        try (CSVReader reader = new CSVReader(new FileReader("src/BancoDeDados/estoque.csv"))) {
-            while (reader.readNext() != null) {
-                numeroDeLinhas++;
-            }
-        } catch (IOException | CsvValidationException e) {
-            e.printStackTrace();
-        }
-
-        int id = numeroDeLinhas;
-
-        Scanner scanner = new Scanner(System.in);
-        String tipo = "Alimento";
-        System.out.println("Nome: ");
-        String nome = scanner.next();
-        System.out.println("Quantidade: ");
-        int quantidade = scanner.nextInt();
-        if (quantidade <= 0) {
+        if (super.quantidade <= 0) {
             throw new QuantidadeMaiorQueZero("A quantidade deve ser maior que zero.");
         }
-        System.out.println("Preco: ");
-        double preco = scanner.nextDouble();
 
 
         try (CSVWriter writer = new CSVWriter(new FileWriter("src/BancoDeDados/estoque.csv", true))) {
             String[] produto = {
-                    String.valueOf(id),
-                    tipo,
-                    nome,
-                    String.valueOf(quantidade),
-                    String.valueOf(preco)
+                    String.valueOf(super.id),
+                    this.tipo,
+                    super.nome,
+                    String.valueOf(super.quantidade),
+                    String.valueOf(super.preco)
             };
             writer.writeNext(produto);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        entrada.transacao(nome, quantidade);
     }
 
     @Override
