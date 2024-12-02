@@ -4,7 +4,9 @@ import Pessoas.Funcionario;
 import Produtos.Alimento;
 import Produtos.Bebida;
 import Transacoes.Entrada;
+import com.opencsv.exceptions.CsvValidationException;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
@@ -44,16 +46,22 @@ public class Main {
                             System.out.println("2- Bebida");
                             int selecao3 = scanner.nextInt();
                             if (selecao3 == 1) {
-                                alimento.adicionarAoEstoque();
+                                alimento.adicionarProduto();
                             } else if (selecao3 == 2) {
-                                bebida.adicionarAoEstoque();
+                                bebida.adicionarProduto();
                             }
                             break;
                         case 2:
-                            estoque.editarProduto();
+                            estoque.editarProdutoDoEstoque();
                             break;
                         case 3:
-                            estoque.removerProduto();
+                            try {
+                                estoque.removerProdutoDoEstoque();
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            } catch (CsvValidationException e) {
+                                throw new RuntimeException(e);
+                            }
                             break;
                         case 4:
                             break;
@@ -70,13 +78,25 @@ public class Main {
                     int selecaoEstoque = scanner.nextInt();
                     switch (selecaoEstoque) {
                         case 1:
-                            estoque.visualizarDados();
+                            try {
+                                estoque.visualizarDados();
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            } catch (CsvValidationException e) {
+                                throw new RuntimeException(e);
+                            }
                             break;
                         case 2:
                             System.out.println("Informe a senha para limpar o estoque: ");
                             String senha = scanner.next();
                             if (senha.equals("1234")) {
-                                estoque.removerDados();
+                                try {
+                                    estoque.removerDados();
+                                } catch (IOException e) {
+                                    throw new RuntimeException(e);
+                                } catch (CsvValidationException e) {
+                                    throw new RuntimeException(e);
+                                }
                                 System.out.println("Estoque limpo com sucesso");
                             }
                             break;

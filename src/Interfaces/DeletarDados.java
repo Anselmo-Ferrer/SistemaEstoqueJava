@@ -1,5 +1,8 @@
 package Interfaces;
 
+import java.io.IOException;
+import com.opencsv.exceptions.CsvValidationException;
+
 public interface DeletarDados {
-    public void removerDados();
+    void removerDados() throws IOException, CsvValidationException;;
 }

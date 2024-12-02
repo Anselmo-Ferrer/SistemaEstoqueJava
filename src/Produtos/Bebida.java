@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class Bebida extends Produto{
 
     @Override
-    public void adicionarAoEstoque() {
+    public void adicionarProduto() {
         Entrada entrada = new Entrada();
 
         int numeroDeLinhas = 0;

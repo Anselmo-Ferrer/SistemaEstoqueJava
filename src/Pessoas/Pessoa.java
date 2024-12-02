@@ -54,6 +54,13 @@ public abstract class Pessoa implements Gerenciamento, MostrarDados, DeletarDado
 
     @Override
     public String toString() {
-        return  "ID: " + id + ", Tipo: " + tipo + ", Nome: " + nome + ", Cargo: " + cargo;
+        return "ID: " + id + ", Nome: " + nome;
+    }
+
+    public String toString(boolean detalhado) {
+        if (detalhado) {
+            return "ID: " + id + ", Tipo: " + tipo + ", Nome: " + nome + ", Cargo: " + cargo;
+        }
+        return this.toString();
     }
 }

@@ -16,51 +16,46 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Estoque implements MostrarDados, DeletarDados {
+    private String estoqueCSV = "src/BancoDeDados/estoque.csv";
 
-    public void removerProduto() {
+    public void removerProdutoDoEstoque() throws IOException, CsvValidationException {
         Saida saida = new Saida();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Id do produto a remover: ");
         int id = scanner.nextInt();
 
-        String arquivoCSV = "src/BancoDeDados/estoque.csv";
         List<String[]> linhas = new ArrayList<>();
         String nomeProduto = "";
         int quantidadeProduto = 0;
 
-        try (CSVReader reader = new CSVReader(new FileReader(arquivoCSV))) {
+        try (CSVReader reader = new CSVReader(new FileReader(estoqueCSV))) {
             String[] linha;
             while ((linha = reader.readNext()) != null) {
                 if (linha[0].equals(String.valueOf(id))) {
                     nomeProduto = linha[2];
                     quantidadeProduto = Integer.parseInt(linha[3]);
-                }
-                if (!linha[0].equals(String.valueOf(id))) {
+                } else {
                     linhas.add(linha);
                 }
             }
-        } catch (IOException | CsvValidationException e) {
-            e.printStackTrace();
         }
 
-        try (CSVWriter writer = new CSVWriter(new FileWriter(arquivoCSV))) {
+        try (CSVWriter writer = new CSVWriter(new FileWriter(estoqueCSV))) {
             writer.writeAll(linhas);
             System.out.println("Produto com ID " + id + " removido.");
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+
         saida.transacao(nomeProduto, quantidadeProduto);
     }
 
-    public void editarProduto() {
+    public void editarProdutoDoEstoque() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Id do produto a editar: ");
         int id = scanner.nextInt();
 
-        String arquivoCSV = "src/BancoDeDados/estoque.csv";
         List<String[]> linhas = new ArrayList<>();
 
-        try (CSVReader reader = new CSVReader(new FileReader(arquivoCSV))) {
+        try (CSVReader reader = new CSVReader(new FileReader(estoqueCSV))) {
             String[] linha;
             while ((linha = reader.readNext()) != null) {
                 if (linha[0].equals(String.valueOf(id))) {
@@ -101,7 +96,7 @@ public class Estoque implements MostrarDados, DeletarDados {
             e.printStackTrace();
         }
 
-        try (CSVWriter writer = new CSVWriter(new FileWriter(arquivoCSV))) {
+        try (CSVWriter writer = new CSVWriter(new FileWriter(estoqueCSV))) {
             writer.writeAll(linhas);
             System.out.println("Alterações salvas no arquivo.");
         } catch (IOException e) {
@@ -110,46 +105,30 @@ public class Estoque implements MostrarDados, DeletarDados {
     }
 
     @Override
-    public void visualizarDados() {
-        try (CSVReader reader = new CSVReader(new FileReader("src/BancoDeDados/estoque.csv"))) {
+    public void visualizarDados() throws IOException, CsvValidationException {
+        try (CSVReader reader = new CSVReader(new FileReader(estoqueCSV))) {
             String[] linha;
-            while (true) {
-                try {
-                    linha = reader.readNext();
-                    if (linha == null) {
-                        break;
-                    }
-                    System.out.println(String.join(", ", linha));
-                } catch (CsvValidationException e) {
-                    e.printStackTrace();
-                }
+            while ((linha = reader.readNext()) != null) {
+                System.out.println(String.join(", ", linha));
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
     @Override
-    public void removerDados() {
-        String estoqueCsv = "src/BancoDeDados/estoque.csv";
-
-        try (CSVReader reader = new CSVReader(new FileReader(estoqueCsv))) {
+    public void removerDados() throws IOException, CsvValidationException, EstoqueVazio {
+        try (CSVReader reader = new CSVReader(new FileReader(estoqueCSV))) {
             String[] linha = reader.readNext();
             linha = reader.readNext();
 
             if (linha == null) {
                 throw new EstoqueVazio("O estoque já está vazio!");
             }
-        } catch (IOException | CsvValidationException e) {
-            e.printStackTrace();
         }
 
-        try (CSVWriter writer = new CSVWriter(new FileWriter(estoqueCsv))) {
+        try (CSVWriter writer = new CSVWriter(new FileWriter(estoqueCSV))) {
             String[] cabecalho = {"Id", "Tipo", "Nome", "Quantidade", "Preço"};
             writer.writeNext(cabecalho);
             System.out.println("O estoque foi limpo!");
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 }

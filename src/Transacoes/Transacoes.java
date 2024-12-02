@@ -42,6 +42,13 @@ public abstract class Transacoes implements MostrarDados, DeletarDados {
 
     @Override
     public String toString() {
-        return "Id: " + id + ", Tipo: '" + tipo + ", Produto: '" + produto + ", Dia: " + dia;
+        return "Id: " + id + ", Produto: " + produto;
+    }
+
+    public String toString(boolean detalhado) {
+        if (detalhado) {
+            return "Id: " + id + ", Tipo: " + tipo + ", Produto: " + produto + ", Dia: " + dia;
+        }
+        return this.toString();
     }
 }
