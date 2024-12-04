@@ -73,4 +73,21 @@ public class Estoque implements MostrarDados, DeletarDados {
             System.out.println("O estoque foi limpo!");
         }
     }
+
+    public void quantidadeDeProtudos() {
+        int quantidadeProdutos = 0;
+
+        try (CSVReader reader = new CSVReader(new FileReader("src/BancoDeDados/estoque.csv"))) {
+            while (reader.readNext() != null) {
+                quantidadeProdutos++;
+            }
+        } catch (IOException | CsvValidationException e) {
+            System.out.println("Erro: " + e.getMessage());
+        }
+
+        quantidadeProdutos = quantidadeProdutos - 1;
+
+        System.out.println("Quantidade de produtos: " + quantidadeProdutos);
+    }
+
 }

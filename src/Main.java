@@ -84,7 +84,8 @@ public class Main {
                     System.out.println("Estoque");
                     System.out.println("1- Ver Estoque");
                     System.out.println("2- Limpar Estoque");
-                    System.out.println("3- Voltar");
+                    System.out.println("3- Quantidade de produtos");
+                    System.out.println("4- Voltar");
                     int selecaoEstoque = scanner.nextInt();
                     switch (selecaoEstoque) {
                         case 1:
@@ -111,6 +112,8 @@ public class Main {
                             }
                             break;
                         case 3:
+                            estoque.quantidadeDeProtudos();
+                        case 4:
                             break;
                         default:
                             System.out.println("Opcao invalida!");
