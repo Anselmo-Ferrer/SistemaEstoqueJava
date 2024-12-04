@@ -33,7 +33,7 @@ public class Bebida extends Produto{
             };
             writer.writeNext(produto);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Erro: " + e.getMessage());
         }
     }
 

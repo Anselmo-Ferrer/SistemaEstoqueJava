@@ -33,7 +33,7 @@ public abstract class Transacoes implements MostrarDados, DeletarDados {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Erro: " + e.getMessage());
         }
     }
 
@@ -44,7 +44,7 @@ public abstract class Transacoes implements MostrarDados, DeletarDados {
         try (FileWriter writer = new FileWriter(transacoesCsv, false)) {
             System.out.println("As transacoes foram limpas!");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Erro: " + e.getMessage());
         }
     }
 

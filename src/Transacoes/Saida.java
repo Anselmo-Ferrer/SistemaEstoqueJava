@@ -22,7 +22,7 @@ public class Saida extends Transacoes{
                 id++;
             }
         } catch (IOException | CsvValidationException e) {
-            e.printStackTrace();
+            System.out.println("Erro: " + e.getMessage());
         }
 
         String produto = nome + " " + quantidade + "x";
@@ -40,7 +40,7 @@ public class Saida extends Transacoes{
             };
             writer.writeNext(transacao);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Erro: " + e.getMessage());
         }
     }
 

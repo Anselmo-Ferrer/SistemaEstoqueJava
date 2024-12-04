@@ -68,9 +68,9 @@ public class Main {
                                 int id = scanner.nextInt();
                                 estoque.removerProdutoDoEstoque(id);
                             } catch (IOException e) {
-                                throw new RuntimeException(e);
+                                System.out.println("Erro: " + e.getMessage());
                             } catch (CsvValidationException e) {
-                                throw new RuntimeException(e);
+                                System.out.println("Erro: " + e.getMessage());
                             }
                             break;
                         case 3:
@@ -91,9 +91,9 @@ public class Main {
                             try {
                                 estoque.visualizarDados();
                             } catch (IOException e) {
-                                throw new RuntimeException(e);
+                                System.out.println("Erro: " + e.getMessage());
                             } catch (CsvValidationException e) {
-                                throw new RuntimeException(e);
+                                System.out.println("Erro: " + e.getMessage());
                             }
                             break;
                         case 2:
@@ -103,9 +103,9 @@ public class Main {
                                 try {
                                     estoque.removerDados();
                                 } catch (IOException e) {
-                                    throw new RuntimeException(e);
+                                    System.out.println("Erro: " + e.getMessage());
                                 } catch (CsvValidationException e) {
-                                    throw new RuntimeException(e);
+                                    System.out.println("Erro: " + e.getMessage());
                                 }
                                 System.out.println("Estoque limpo com sucesso");
                             }

@@ -22,7 +22,7 @@ public class Entrada extends Transacoes{
                 id++;
             }
         } catch (IOException | CsvValidationException e) {
-            e.printStackTrace();
+            System.out.println("Erro: " + e.getMessage());
         }
 
         String produto = nome + " " + quantidade + "x";
@@ -34,7 +34,7 @@ public class Entrada extends Transacoes{
             String[] transacao = {String.valueOf(id), tipo, produto, dataFormatada};
             writer.writeNext(transacao);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Erro: " + e.getMessage());
         }
     }
 

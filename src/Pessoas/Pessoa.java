@@ -42,11 +42,11 @@ public abstract class Pessoa implements Gerenciamento, MostrarDados, DeletarDado
                     }
                     System.out.println(String.join(", ", linha));
                 } catch (CsvValidationException e) {
-                    e.printStackTrace();
+                    System.out.println("Erro: " + e.getMessage());
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Erro: " + e.getMessage());
         }
     }
 
@@ -57,7 +57,7 @@ public abstract class Pessoa implements Gerenciamento, MostrarDados, DeletarDado
         try (FileWriter writer = new FileWriter(pessoasCsv, false)) {
             System.out.println("Os dados das pessoas foram deletados!");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Erro: " + e.getMessage());
         }
     }
 

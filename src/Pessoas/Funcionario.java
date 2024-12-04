@@ -35,7 +35,7 @@ public class Funcionario extends Pessoa {
             };
             writer.writeNext(pessoa);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Erro: " + e.getMessage());
         }
     }
 
@@ -53,14 +53,14 @@ public class Funcionario extends Pessoa {
                 }
             }
         } catch (IOException | CsvValidationException e) {
-            e.printStackTrace();
+            System.out.println("Erro: " + e.getMessage());
         }
 
         try (CSVWriter writer = new CSVWriter(new FileWriter(arquivoCSV))) {
             writer.writeAll(linhas);
             System.out.println("Pessoa com ID " + id + " removido.");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Erro: " + e.getMessage());
         }
     }
 
