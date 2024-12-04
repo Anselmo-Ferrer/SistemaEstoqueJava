@@ -6,6 +6,7 @@ import Produtos.Bebida;
 import Transacoes.Entrada;
 import com.opencsv.exceptions.CsvValidationException;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -17,6 +18,8 @@ public class Main {
         Funcionario funcionario = new Funcionario();
         Estoque estoque = new Estoque();
         Entrada entrada = new Entrada();
+        InterfaceGrafica interfaceGrafica = new InterfaceGrafica();
+        interfaceGrafica.painelPrincipal();
 
         while (menu) {
             Scanner scanner = new Scanner(System.in);
