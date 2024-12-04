@@ -13,6 +13,7 @@ import java.time.MonthDay;
 public abstract class Transacoes implements MostrarDados, DeletarDados {
     protected int id;
     protected String produto;
+    protected int quantidade;
     protected MonthDay dia;
 
     public abstract void transacao(String nome, int quantidade);
@@ -55,7 +56,7 @@ public abstract class Transacoes implements MostrarDados, DeletarDados {
 
     public String toString(boolean detalhado) {
         if (detalhado) {
-            return "Id: " + id + ", Produto: " + produto + ", Dia: " + dia;
+            return "Id: " + id + ", Produto: " + produto + ", Quantidade: " + quantidade + ", Dia: " + dia;
         }
         return this.toString();
     }
